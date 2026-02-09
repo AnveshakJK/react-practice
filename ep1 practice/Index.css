@@ -1,3 +1,523 @@
-#root{
-background-color: aqua;
+/* body{
+    padding: 0 ;
+    margin: 0;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    margin:1rem 0rem 0rem 2rem;
+    align-items: center;
+      
+}
+
+.logoNavItems{
+   display: flex;
+  flex-direction: row;
+}
+
+.header > img{
+    height:25vw;
+    width: 40vw;
+}
+
+.logo{
+    display: flex;
+    flex-direction: row;
+    padding-right:1rem
+}
+
+.logo > img{
+    height:8vw;
+    width:8vw;
+    fill:rgb(0, 0, 0);
+    border-radius: 50%;
+}
+
+.nav-items{
+     display: flex;
+    flex-direction: row;
+    margin: 0rem 0.7rem 0rem 0.7rem;
+    gap: 1rem;
+}
+
+p{
+   padding:0.5 rem ;
+   color:#ff7400f0;
+   font-family:cursive;
+}
+
+.hCard{
+    display: flex;
+    flex-direction: row;
+    gap:2rem;
+}
+
+.hCardItem{
+    margin: 1vw;
+    height: 15vw;
+    width: 20vw;
+    background-color: rgba(255, 178, 71, 0.792);
+    display: flex;
+    flex-direction:row;
+    gap: 3vw;
+    border-radius: 10%;
+    padding: 1vw;
+}
+
+.hItemsOfCard > button{
+   border-radius: 25vw ;
+}
+
+.hItemsOfCardImg > img{
+    margin-top: 5vw;
+    height: 10vw;
+    width: 10vw;
+    border-radius: 50%;
+} */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Proxima Nova", sans-serif;
+}
+
+.swiggy-container {
+  background-color: #0d47a1;
+  min-height: 110vh;
+  position: relative;
+  overflow-x: hidden;
+  color: white;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  z-index: 10;
+  position: relative;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  width: 40px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.logo-text {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  list-style: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-get-app {
+  border: 1px solid white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.btn-sign-in {
+  background-color: black;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 20px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+  position: relative;
+  z-index: 5;
+}
+
+.search-container {
+  display: flex;
+  background: white;
+  border-radius: 8px;
+  padding: 0;
+  width: 800px;
+  height: 60px;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
+}
+
+.location-input {
+  flex: 0.3;
+  padding: 0 20px;
+  border-right: 1px solid #ccc;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-input {
+  flex: 0.7;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+}
+
+.search-input input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.cards-container {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
+.promo-card {
+  background: white;
+  border-radius: 20px;
+  width: 400px;
+  height: 300px;
+  padding: 30px;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
+}
+
+.promo-card h2 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #444;
+}
+
+.promo-CardItems {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sub-text {
+  font-size: 18px;
+  color: #888;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.offer-tag {
+  color: #fc8019;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.explore-btn {
+  background-color: #fc8019;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  width: fit-content;
+  cursor: pointer;
+  margin-top: auto;
+}
+
+.bg-image-left {
+  position: absolute;
+  left: 0;
+  top: 150px;
+  width: 200px;
+  z-index: 1;
+  border-radius: 20%;
+  transform: skew(-30deg, 30deg);
+}
+
+.bg-image-right {
+  position: absolute;
+  right: 0;
+  top: 100px;
+  width: 250px;
+  z-index: 1;
+  border-radius: 20%;
+  transform: rotate(20deg);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 15px;
+    gap: 20px;
+  }
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    font-size: 13px;
+  }
+  .search-container {
+    width: 90%;
+    height: auto;
+    padding: 10px;
+  }
+  .location-input {
+    display: none;
+  }
+  .search-input {
+    flex: 1;
+    padding: 5px 10px;
+    border: none;
+  }
+  .cards-container {
+    flex-direction: column;
+    width: 90%;
+    gap: 20px;
+  }
+  .promo-card {
+    width: 100%;
+    height: auto;
+    min-height: 250px;
+  }
+  .bg-image-left,
+  .bg-image-right {
+    opacity: 0.1;
+    z-index: 0;
+  }
+  .promo-card h2 {
+    font-size: 24px;
+  }
+  .logo-text {
+    font-size: 20px;
+  }
+}
+
+/* Body start here  */
+
+.body-container {
+  font-family: sans-serif;
+  color: #02060c;
+  overflow-x: hidden;
+}
+.food-section {
+  padding: 30px 50px;
+}
+.food-header {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+.food-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 30px;
+  padding-bottom: 20px;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.food-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.food-card {
+  min-width: 140px;
+  text-align: center;
+  cursor: pointer;
+}
+.food-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+.app-banner {
+  background-color: #f0f0f5;
+  margin: 40px 50px;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("./Assests/AppBanner.png")
+    center/cover no-repeat;
+  height: 350px;
+}
+/* We hide the text visually since it's usually inside the image, 
+   but keep it for SEO/Accessibility if needed. 
+   If you want text over it, remove 'text-indent'.
+   https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/portal/m/seo/App_download_banner.png
+   */
+.banner-content {
+  display: none;
+}
+.cities-section {
+  padding: 0 50px 60px 50px;
+}
+.cities-header {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 30px;
+}
+.cities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+}
+.city-btn {
+  border: 1px solid #d4d5d9;
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  font-weight: 600;
+  text-align: center;
+  color: #02060c;
+  text-decoration: none;
+  display: block;
+}
+.city-btn.highlight {
+  font-weight: 800;
+  background-color: #f9f9f9;
+}
+@media (max-width: 768px) {
+  .food-section,
+  .cities-section,
+  .app-banner {
+    padding: 20px;
+    margin: 20px;
+  }
+  .app-banner {
+    height: 200px;
+    margin: 20px;
+  }
+  .cities-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .food-card {
+    min-width: 100px;
+  }
+  .food-img {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+/* footer */
+.footer-container {
+  background-color: #f0f0f5;
+  padding: 50px 80px 20px 80px;
+  font-family: sans-serif;
+  color: #02060c;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+.footer-col h4 {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #02060c;
+}
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+.footer-col li {
+  margin-bottom: 12px;
+}
+.footer-col a {
+  text-decoration: none;
+  color: #6a6c72;
+  font-size: 16px;
+  transition: color 0.2s;
+}
+.footer-col a:hover {
+  color: #fc8019;
+}
+.swiggy-logo {
+  width: 150px;
+  margin-bottom: 10px;
+  /* filter: grayscale(100%); */
+}
+.copyright {
+  color: #6a6c72;
+  font-size: 14px;
+}
+.city-select-box {
+  border: 1px solid #d4d5d9;
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  color: #6a6c72;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.bottom-bar {
+  border-top: 1px solid #d4d5d9;
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.app-btn-container {
+  display: flex;
+  gap: 20px;
+}
+.store-btn {
+  height: 100px;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .footer-container {
+    padding: 30px 20px;
+  }
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  .bottom-bar {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+}
+@media (max-width: 480px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
 }
