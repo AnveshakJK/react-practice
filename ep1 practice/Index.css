@@ -257,21 +257,24 @@ p{
   position: absolute;
   left: 0;
   top: 150px;
-  width: 200px;
+  width: 16%;
   z-index: 1;
   border-radius: 20%;
   transform: skew(-30deg, 30deg);
+  box-shadow: 0 0 50px 15px #48abe0;
 }
 
 .bg-image-right {
   position: absolute;
   right: 0;
   top: 100px;
-  width: 250px;
+  width: 20%;
   z-index: 1;
   border-radius: 20%;
   transform: rotate(20deg);
+  box-shadow: 0 0 50px 15px #48abe0;
 }
+
 
 @media (max-width: 768px) {
   .navbar {

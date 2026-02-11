@@ -1,328 +1,83 @@
 import React, { useRef } from "react";
 import ReactDOM from "react-dom/client";
+import { Header } from "./src/components/Header";
+import { Body} from "./src/components/Body";
+import { Footer } from "./src/components/Footer";
+
 /*
-As i am run the server with new change in file but as output show of old changes due to :-
-If you are seeing old code despite running the dev server, it is almost certainly due to stale cache files or a misconfigured entry point. Parcel caches your build to disk to speed up restarts, and sometimes this cache becomes "stuck".
-so either delete that cache by:- rd /s /q .parcel-cache dist or just ignore old cache as:- npx parcel index.html --no-cache
+-> there structure properly make a seperate component for different file. 
+-> there put in src folder
+ -> in components folder having a different component file 
+ ->never keep hardcoded data in components file or app/src
+->like url,data ,logo,hardcoded strings ,etc.keep in seperate file like utils/constants.
+->component and others file name of start letter in capital.
+->Two ways export as named and default.single file having one defualt not multiple ,so for multiple using by named export as export variable name _name_.
+for this import for named export as {name variable}.
 
-->>as when you pass dynamic data in their then use it as a props.
+->it good to keep your file small as it help in better understandation like of 100 lines of code 
 
-->> there do destructing sideways also like 
-{resName,cuisuine}. equivalent as 
-const {resName,cuisine} = props;
+->Hook-normal js function which gives the utility. local state variable-super powerful variable that help in render the thing  ,
 
-->> ((config driver UI))-make a ui accord. for different regions as based on data .
+->useState,useRef,
 
-.CDN -> clodinary use it as for post images other to use it.string concatenation
+->whenever the state update then react rerender the component.
 
-_.> there refactor the props and use based on data is want as it take or not .example
- const {resData} = props;
+-> in jsx there js in function of value get changed the UI level there changes how get reflect this helpful in there of (HOOK). which help in getting of as local state variable update ,then as soon as UI level layer update by rerender component. 
 
-const{cloudinaryImageId,name,avgRating,cuisines,costForTwo,deliveryTime,} = resData?.data ;
+-> so this fast changes is done by react.as DOM operation done is fast.
 
-looping over same data just with index change there map is better to use.
-ex:-  
-as in map there use a key.
-{resList.map((restaurant)=>(<RestaurantCard key={restaurant.data.id} resData = {restaurant} /> ))};
+-> why use web app or app is fast.as react is fast .not this answer is not correct as singly.(react is only good at dom manipulation).
 
-Q.)why need keys?
-so of having a container and inside a child restaurant there react render these component and there uniquely id for identification.so new card will come on first place.so react will unable to know which placed it to wheather it on 1st,2nd ,etc so it rerender and treat all it same. (but if give key as id then render one restaurant only not others).
+->( as soon as change my state variable there react automatically done in fast manner. It keeps data layer sync with UI).
 
-->there use index key as also which is another property of map for key.((react is not suggest to use indexes as a key).This is due to order of item may change). so there place of placing item is get changed.
+->(there useState in function use of updating varibale. one time we define with usestate in params as pass but next time i want to change that value then it done by using of function make like name that use it then pass in their value).
+
+---***>)Now as how react work?
+Ans.) react uses reconcialation algorithm."this also known as ((react fiber))".
+On UI we have DOM(it just like a tree).
+
+there having a restaurant container and in this having 7 restaurant cards.suppose my UI changes suppose of filtering these 7 cards to 3 filtered cards.
+
+
+for there 7 res card and restaurant container there react creates a ((virtual dom  )).
+
+==> 
+actual dom -> are tags i.e <div><div><img> react element 
+
+==> 
+  so virtual dom -> is representation of actual dom. 
+
+
+console.log(<Body/>);this is virtual dom that print.
+
+this print an object. 
+React.createElement("h1",{})=> React Element(object).
+
+in this Body component of read by react as jsx,it create a object.i.e a virtual dom which it keep with it.
+
+so virtual dom it a object for representation of actual dom.
+
+==> 
+  (Diff algorithm) is help in find out the difference between two virtual dom,one is updated and previous virtual dom. 
+
+  suppose if have a res conatiner. contain a 7 res card. when click the button then this (old virtual dom ) is now updated to 3 (new virtual dom) there find difference in between them as of 4 node difference . then it actually update the dom on every render cycle.
+
+This is all reconciliation algorithm or react fiber.
+reconcialation - whenever the changes happen.  
+ 
+this react fiber is the new way of updating the dom and find difference. 
+
+find out diff between object is fast as comp to html.react is help in keep track of all this ui dom node.
+this react doesn't touch the html alot it done by object this virtual dom.
+
+so why react is fast??
+as it done efficient dom manipulation as due to having a virtual dom(it just a object).react took over it and find difference and update UI.
+
+const [listofRestaurant,setListofRestaurant] = useState(resList);
+
+in this second function want due to want someone when trigger by action then able to do that task.
 
 */
-
-const leftImage =
-  "https://img.freepik.com/premium-photo/set-vegetables-paper-bag-isolated-white-background-concept-healthy-vegetarian-food_152520-2015.jpg";
-const rightImage =
-  "https://img.freepik.com/premium-photo/set-vegetables-paper-bag-isolated-white-background-concept-healthy-vegetarian-food_152520-2015.jpg";
-const swiggyLogo ="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZT3Xe38PaVJMIHGMU9qNkQHyIvPX5vf8_Fg&s"
-  ;
-
-const Header = () => {
-  return (
-    /*
-    <div className="header">
-      <div className="logoNavItems">
-        <div className="logo">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZT3Xe38PaVJMIHGMU9qNkQHyIvPX5vf8_Fg&s" />
-          <p>Food Delivery</p>
-        </div>
-        <div className="nav-items">
-          <p link="/home">Delivery Coorporate</p>
-          <p>Partner With Us</p>
-          <p>Get to Home</p>
-          <p>Sign In</p>
-        </div>
-      </div>
-      <img src="https://img.freepik.com/premium-photo/set-vegetables-paper-bag-isolated-white-background-concept-healthy-vegetarian-food_152520-2015.jpg"></img>
-      <div className="searchBoxHeader">
-        <input
-          type="text "
-          name="q"
-          placeholder="Search for restaurant,item or more."
-        ></input>
-      </div>
-      <div className="hCard">
-        <div className="hCardItem">
-        <div className="hItemsOfCard">
-         <p>Items Name</p>
-         <p>Items Place</p>
-         <p>Discounts</p>
-         <button type="button">Explore</button>
-        </div>
-        <div className="hItemsOfCardImg">
-           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt61WQwxDYvQwrK9IqXj4_bjCYuk1nWdEasw&s"/>
-        </div>
-        </div>
-
-        <div className="hCardItem">
-            <div className="hItemsOfCard">
-         <p>Items Name</p>
-         <p>Items Place</p>
-         <p>Discounts</p> 
-          <button type="button">Explore</button>
-        </div>
-        <div className="hItemsOfCardImg">
-           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt61WQwxDYvQwrK9IqXj4_bjCYuk1nWdEasw&s"/>
-        </div>
-        </div>
-        <img src="https://img.freepik.com/premium-photo/set-vegetables-paper-bag-isolated-white-background-concept-healthy-vegetarian-food_152520-2015.jpg"></img>
-      </div>
-    </div> */
-
-    <div className="swiggy-container">
-      <nav className="navbar">
-        <div className="logo-container">
-          <img src={swiggyLogo} alt="Swiggy" className="logo-icon" />
-          <span className="logo-text">Food Delivery</span>
-        </div>
-
-        <ul className="nav-links">
-          <li>
-            <a href="#">Delivery Coorporate </a>
-          </li>
-          <li>
-            <a href="#">Partner with us</a>
-          </li>
-          <li>
-            <a href="#" className="btn-get-app">
-              Get the Home ↗
-            </a>
-          </li>
-          <li>
-            <button className="btn-sign-in">Sign in</button>
-          </li>
-        </ul>
-      </nav>
-
-      <main className="hero-section">
-        <img src={leftImage} alt="Veggies" className="bg-image-left" />
-        <img src={rightImage} alt="Sushi" className="bg-image-right" />
-        <div className="search-container">
-          <div className="location-input">
-            <span>📍</span>
-            <span>Search for restaurant,item or more.⌄</span>
-          </div>
-          <div className="search-input">
-            <input
-              type="text"
-              placeholder="Search for restaurant, item or more"
-            />
-            <span style={{ color: "#888", cursor: "pointer" }}>🔍</span>
-          </div>
-        </div>
-        <div className="cards-container">
-          <div className="promo-card">
-            <div>
-              <h2>FOOD DELIVERY</h2>
-              <p className="sub-text">FROM RESTAURANTS</p>
-              <p className="offer-tag">UPTO Discounts OFF</p>
-            </div>
-            <div className="promo-CardItems">
-              <div>
-                <button className="explore-btn">Explore →</button>
-              </div>
-              <div>
-                {" "}
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt61WQwxDYvQwrK9IqXj4_bjCYuk1nWdEasw&s" />
-              </div>
-            </div>
-          </div>
-          <div className="promo-card">
-            <div>
-              <h2>INSTAMART</h2>
-              <p className="sub-text">INSTANT GROCERY</p>
-              <p className="offer-tag">UPTO 60% OFF</p>
-            </div>
-            <div className="promo-CardItems">
-              <div>
-                <button className="explore-btn">Explore →</button>
-              </div>
-              <div>
-                {" "}
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt61WQwxDYvQwrK9IqXj4_bjCYuk1nWdEasw&s" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
-  );
-};
-
-const foodItems = [
-  { name: "Pizza",img: "https://www.svgrepo.com/show/505213/pizza.svg",},
-  { name: "Burger", img: "https://www.svgrepo.com/show/505202/hamburger.svg" },
-  { name: "Biryani", img: "https://www.svgrepo.com/show/505195/hand-pulled-noodle.svg" },
-  { name: "Dosa", img: "https://cdn-icons-png.flaticon.com/128/4727/4727322.png" },
-  { name: "Chinese", img: "https://cdn-icons-png.flaticon.com/128/16024/16024466.png" },
-  { name: "Cake", img: "https://cdn-icons-png.flaticon.com/128/2682/2682340.png" },
-  { name: "Rolls", img: "https://www.svgrepo.com/show/275732/rolls-dessert.svg" },
-  { name: "Ice Cream", img: "https://cdn-icons-png.flaticon.com/128/499/499635.png" },
-];
-
-const cities = [
-  "Bangalore",
-  "Gurgaon",
-  "Hyderabad",
-  "Delhi",
-  "Mumbai",
-  "Pune",
-  "Kolkata",
-  "Chennai",
-  "Ahmedabad",
-  "Chandigarh",
-  "Jaipur",
-];
-
-const Body = () => {
-  return (
-    <>
-      <div className="body-container">
-        <section className="food-section">
-          <h2 className="food-header">Order our best food options</h2>
-          <div className="food-scroll-container">
-            {foodItems.map((item, idx) => (
-              <div key={idx} className="food-card">
-                <img src={item.img} alt={item.name} className="food-img" />
-                <div className="food-name">{item.name}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-        <section className="app-banner">
-          <div className="banner-content">
-            <h2>Get the Swiggy App</h2>
-          </div>
-        </section>
-        <section className="cities-section">
-          <h3 className="cities-header">Cities with food delivery</h3>
-          <div className="cities-grid">
-            {cities.map((city, idx) => (
-              <a href="#" key={idx} className="city-btn">
-                Order food in {city}
-              </a>
-            ))}
-            <a href="#" className="city-btn highlight">
-              Show More ⌄
-            </a>
-          </div>
-        </section>
-      </div>
-    </>
-  );
-};
-
-const logoUrl =
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZT3Xe38PaVJMIHGMU9qNkQHyIvPX5vf8_Fg&s";
-const appStore =
-  "https://www.svgrepo.com/show/303128/download-on-the-app-store-apple-logo.svg";
-const playStore =
-  "https://www.svgrepo.com/show/303139/google-play-badge-logo.svg";
-
-const Footer = () => {
-  return (
-    <footer className="footer-container">
-      <div className="footer-content">
-        <div className="footer-col">
-          <img src={logoUrl} alt="Swiggy" className="swiggy-logo" />
-          <p className="copyright">© 2026 Food Delivery Limited</p>
-        </div>
-        <div className="footer-col">
-          <h4>Company</h4>
-          <ul>
-            <li>
-              <a href="#">About Us</a>
-            </li>
-            <li>
-              <a href="#">Food Delivery Corporate</a>
-            </li>
-            <li>
-              <a href="#">Careers</a>
-            </li>
-            <li>
-              <a href="#">Team</a>
-            </li>
-            <li>
-              <a href="#">Food Delivery One</a>
-            </li>
-          </ul>
-        </div>
-        <div className="footer-col">
-          <h4>Contact us</h4>
-          <ul>
-            <li>
-              <a href="#">Help & Support</a>
-            </li>
-            <li>
-              <a href="#">Partner with us</a>
-            </li>
-          </ul>
-          <h4 style={{ marginTop: "30px" }}>Legal</h4>
-          <ul>
-            <li>
-              <a href="#">Terms & Conditions</a>
-            </li>
-            <li>
-              <a href="#">Cookie Policy</a>
-            </li>
-            <li>
-              <a href="#">Privacy Policy</a>
-            </li>
-          </ul>
-        </div>
-        <div className="footer-col">
-          <h4>Life at Food Delivery</h4>
-          <ul>
-            <li>
-              <a href="#">Explore with Food Delivery</a>
-            </li>
-            <li>
-              <a href="#">Food Delivery News</a>
-            </li>
-            <li>
-              <a href="#">Snackables</a>
-            </li>
-          </ul>
-          <h4 style={{ marginTop: "30px" }}>Social Links</h4>
-          <div className="social-links">
-            <span>LinkedIn </span>
-            <span>Instagram </span>
-            <span>Twitter</span>
-          </div>
-        </div>
-      </div>
-      <div className="bottom-bar">
-        <h3>For better experience, download the food delivery app now</h3>
-        <div className="app-btn-container">
-          <img src={playStore} alt="Google Play" className="store-btn" />
-          <img src={appStore} alt="App Store" className="store-btn" />
-        </div>
-      </div>
-    </footer>
-  );
-};
 
 const AppLayout = () => {
   return (
@@ -333,6 +88,7 @@ const AppLayout = () => {
     </div>
   );
 };
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(<AppLayout />);
