@@ -1,7 +1,16 @@
+import { useEffect, useState } from "react";
 import { Food_delivery_Logo,leftImage,rightImage,promoCardImage } from "../utils/constants";
 
 export const Header = () => {
-  return (
+   const [search,setSearch] = useState("k");
+
+   useEffect(()=>{
+    setTimeout(()=>{
+      console.log("delayed key stroke");
+    },1000);
+  },[search]);
+
+  return (  
     <div className="swiggy-container">
       <nav className="navbar">
         <div className="logo-container">
@@ -26,7 +35,7 @@ export const Header = () => {
             <span>Search for restaurant,item or more.⌄</span>
           </div>
           <div className="search-input">
-            <input type="text" placeholder="Search for restaurant, item or more"/>
+            <input type="text" placeholder="Search for restaurant, item or more" value={search}  onChange={(t)=>{setSearch(t.target.value);console.log(t.target.value);}}/>
             <span style={{ color: "#888", cursor: "pointer" }}>🔍</span>
           </div>
         </div>

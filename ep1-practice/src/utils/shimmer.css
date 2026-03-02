@@ -1,0 +1,32 @@
+.shimmer-container {
+  display: flex;
+  gap: 20px;
+  background: linear-gradient(
+    90deg,
+    #231c1c 25%,
+    #8b7272 50%,
+    #707387fc 75%
+  ); 
+  animation: shimmer 2.5s infinite;
+  width: auto;
+  height: auto;
+  justify-content: center;
+}
+
+.shimmer-card {
+  width: 200px;
+  height: 250px;
+  background-color: rgb(61, 67, 80);
+  background-size: 200% 100%;
+  border-radius: 10px;
+  margin:5vw;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}

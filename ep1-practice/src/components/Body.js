@@ -1,10 +1,12 @@
 import { foodItems,cities } from "../utils/constants";
+import { Shimmer } from "./shimmer";
 
- 
-
-export const Body = () => {
+export const Body = ({listOfRestaurant}) => {
+  // if (!listOfRestaurant || listOfRestaurant.length === 0) {
+  //   return <Shimmer />;
+  // }
   return (
-    <>
+    <> 
       <div className="body-container">
         <section className="food-section">
           <h2 className="food-header">Order our best food options</h2>
@@ -17,9 +19,12 @@ export const Body = () => {
             ))}
           </div>
         </section>
-        <section className="app-banner">
+      {/* {(!listOfRestaurant || listOfRestaurant.length === 0) ?  */}
+      {/* <Shimmer /> : */}
+       <section className="app-banner">
           <div className="banner-content"><h2>Get the Swiggy App</h2></div>
-        </section>
+        </section> 
+      {/* } */}
         <section className="cities-section"><h3 className="cities-header">Cities with food delivery</h3>
           <div className="cities-grid">
             {cities.map((city, idx) => (
